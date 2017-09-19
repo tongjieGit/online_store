@@ -1,7 +1,7 @@
 <template>
  <div>
     <header class="header">
-      <p class="logo">IBS管理后台</p>
+      <p class="logo">test</p>
       <router-link to="/rights" class="rights">授权中心</router-link>
       <router-link to="/catering" class="catering">餐饮服务</router-link>
       <p class="current-user">
