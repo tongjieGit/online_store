@@ -1,68 +1,100 @@
 <template>
  <div>
     <header class="header">
-      <p class="logo">test</p>
-      <router-link to="/rights" class="rights">授权中心</router-link>
-      <router-link to="/catering" class="catering">餐饮服务</router-link>
-      <p class="current-user">
-        <span>当前账号: 1001&nbsp;&nbsp;</span>
-        <el-dropdown @command="handleCommand">
-          <span class="el-dropdown-link">
-            <i class="el-icon-arrow-down"></i>
-          </span>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item command="a">修改密码</el-dropdown-item>
-            <el-dropdown-item command="b">安全退出</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-      </p>
+     	<div class="whole_div"> 
+        <button id="chooseEat" @click="choose()">What to eat?</button>
+        <p id="mainChoose"></p>
+        <p id="subChoose"></p>
+        <p id="congratulations"></p>
+      </div>
     </header>
-    <router-view></router-view>
+    <!-- <router-view></router-view> -->
   </div>
 </template>
 
 <script>
+import Http from '../assets/lib/Http';
 export default {
    methods: {
-    handleCommand(){
-      console.log(1);
+    choose(){
+      const tmpObj = {
+        
+      }
+       Http({
+          type: 'POST',
+          url: "",
+          data: JSON.stringify(tmpObj),
+          complete: function(data) {
+						console.log("success")
+					},
+          error: function(err) {
+						console.log("error")
+					},
+      });
     }
   }
 }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style lang="less" scoped>
-.header {
-  width: 100%;
-  height: 50px;
-  background-color: #1F2D3D;
-  color: #fff;
-  .logo {
-    float: left;
-    width: 200px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-  }
-  .rights,
-  .catering {
-    float: left;
-    width: 150px;
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    color: #836343;
-    &.router-link-active {
-      color: #fff;
-      background-color: #58B7FF;
-    }
-  }
-  .current-user {
-    width: 300px;
-    float: right;
-    margin-right: 20px;
-    line-height: 50px;
-  }
+<style  scoped>
+body{
+	margin:0px;
+	padding: 0px;
+	font-family: arial,"Microsoft Yahei",sans-serif;
+}
+
+.whole_div{
+	width: 1200px;
+	margin:0 auto;
+}
+
+#chooseEat{
+	position: relative;
+	color: rgba(255,255,255,1);
+	text-decoration: none;
+	background-color: rgba(219,87,5,1);
+	font-family: 'Yanone Kaffeesatz';
+	font-weight: 700;
+	font-size: 26px;
+	display: block;
+	padding: 4px;
+	border: none;
+	-webkit-border-radius: 8px;
+	-moz-border-radius: 8px;
+	border-radius: 8px;
+	-webkit-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+	-moz-box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+	box-shadow: 0px 9px 0px rgba(219,31,5,1), 0px 9px 25px rgba(0,0,0,.7);
+	margin: 100px auto;
+	width: 300px;
+	text-align: center;
+	height: 100px;
+	-webkit-transition: all .1s ease;
+	-moz-transition: all .1s ease;
+	-ms-transition: all .1s ease;
+	-o-transition: all .1s ease;
+	transition: all .1s ease;
+}
+
+#chooseEat:active {
+	-webkit-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+	-moz-box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+	box-shadow: 0px 3px 0px rgba(219,31,5,1), 0px 3px 6px rgba(0,0,0,.9);
+	position: relative;
+	top: 6px;
+}
+
+#chooseEat:focus{
+	outline: none;
+}
+p{
+	width: 300px;
+	height: 40px;
+	font-size: 20px;
+	color: rgba(0,0,0,1);
+	display: block;
+	margin: 0 auto;
+	/*margin-left: 300px;*/
 }
 </style>
