@@ -2,9 +2,9 @@
  <div>
     <header class="header">
      	<div class="whole_div"> 
-        <button id="chooseEat" @click="choose()">What to eat?</button>
-        <p id="mainChoose"></p>
-        <p id="subChoose"></p>
+        <button id="chooseEat" @click="choose()">{{content}}</button>
+        <p id="mainChoose">{{mainText}}</p>
+        <p id="subChoose">{{subText}}</p>
         <p id="congratulations"></p>
       </div>
     </header>
@@ -15,9 +15,26 @@
 <script>
 import Http from '../assets/lib/Http';
 export default {
+	 data() {
+    return {
+			content:"What to eat?",
+			mainText: "",
+			subText: "",
+			times: 0,
+    };
+  },
    methods: {
     choose(){
-      const tmpObj = {
+			this.content = "Go on!";
+			if (this.times === 0) {
+				getMainMenu();
+			}else{
+				getSubMenu();
+			}
+		},
+		getMainMenu(){
+			this.times = 1;
+			const tmpObj = {
         
       }
        Http({
@@ -25,18 +42,37 @@ export default {
           url: "",
           data: JSON.stringify(tmpObj),
           complete: function(data) {
+						this.mainText = "test1";
 						console.log("success")
 					},
           error: function(err) {
 						console.log("error")
 					},
       });
-    }
+		},
+		getSubMenu(){
+			this.times = 2;
+			this.content = "O啦";
+			const tmpObj = {
+        
+      }
+       Http({
+          type: 'POST',
+          url: "",
+          data: JSON.stringify(tmpObj),
+          complete: function(data) {
+						this.subText = "test2";
+						console.log("success")
+					},
+          error: function(err) {
+						console.log("error")
+					},
+      });
+		}
   }
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  scoped>
 body{
 	margin:0px;
@@ -95,6 +131,5 @@ p{
 	color: rgba(0,0,0,1);
 	display: block;
 	margin: 0 auto;
-	/*margin-left: 300px;*/
 }
 </style>
